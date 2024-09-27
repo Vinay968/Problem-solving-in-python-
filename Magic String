@@ -1,25 +1,16 @@
-import math
+from collections import Counter
 
-def is_prime(num):
-    if num <= 1:
-        return False
-    if num == 2:
-        return True
-    if num % 2 == 0:
-        return False
-    for i in range(3, int(math.sqrt(num)) + 1, 2):
-        if num % i == 0:
-            return False
-    return True
+def min_steps_to_magic_string(S):
+    if len(set(S)) == 1:
+        return 0
+    
+    freq = Counter(S)
+    
+    max_freq = max(freq.values())
+    
+    return len(S) - max_freq
 
-def next_prime(N):
-    candidate = N + 1
-    while True:
-        if is_prime(candidate):
-            return candidate
-        candidate += 1
+S = input()
 
-# Input reading
-N = int(input())
-result = next_prime(N)
+result = min_steps_to_magic_string(S)
 print(result)
